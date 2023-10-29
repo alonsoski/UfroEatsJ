@@ -57,11 +57,15 @@ public class SocketServidor {
             Cuenta c = new Cuenta(peticion[1],peticion[2]);
             System.out.println("peticion es posible crear usuario");
             out.println(c.canCreateUser());
+
         } else if (peticion[0].equals("CU2")) {
             Cuenta c = new Cuenta(peticion[1],peticion[2]);
             System.out.println("peticion crear Usuario");
+            System.out.println("el ip recibiente es:"+this.ip);
             c.crearCuenta();
         }
+        out.close();
+        outputStream.close();
 
     }
 

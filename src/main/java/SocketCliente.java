@@ -4,9 +4,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class SocketCliente {
-    private String ip;
     private int puerto;
-    private String ipLocal = obtenerIp();
+    private String ip = obtenerIp();
 
     private String obtenerIp() {
         String ip = "";
@@ -46,7 +45,7 @@ public class SocketCliente {
     }
     public void enviar(String mensaje){
         try {
-
+            System.out.println("el ip enviante es:"+this.ip);
             Socket socket = new Socket(this.ip, this.puerto);
             OutputStream outputStream = socket.getOutputStream();
             PrintWriter out = new PrintWriter(outputStream, true);
