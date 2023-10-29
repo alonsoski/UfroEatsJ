@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 
 public class Cuenta {
     private String correo;
@@ -27,12 +25,16 @@ public class Cuenta {
     }
 
     private void crearArchivoContrasena() {
-        File carpeta = new File("./Cuentas/"+this.correo+"/contraseña.txt");
+        File archivo = new File("./Cuentas/"+this.correo+"/contraseña.txt");
         try {
-            carpeta.mkdir();
+            archivo.createNewFile();
+            FileWriter fW = new FileWriter(archivo);
+            PrintWriter pW = new PrintWriter(fW);
+            pW.println(this.contrasena);
         }catch (Exception e){
-            System.out.println("no se ha podido crear la carpeta correo");
+            System.out.println("no se ha podido el archivo contrasena");
         }
+
     }
 
     private void crearCarpetaCuenta() {
