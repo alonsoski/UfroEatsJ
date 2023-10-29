@@ -46,8 +46,10 @@ lobby();
         if (peticion.equals("true")){
             s.enviar("CU2/"+correo+"/"+contra);
             System.out.println("usuario creado");
+            lobby();
         }else {
             System.out.println("ese correo ya esta ingresado");
+            lobby();
         }
     }
 
