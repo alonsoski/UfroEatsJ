@@ -37,6 +37,7 @@ public class SocketServidor {
             BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
             String mensajeCliente = in.readLine();
             String[] peticion=mensajeCliente.split("/");
+            System.out.println("peticion"+peticion[0]);
             switchPeticiones(peticion,clientSocket);
             clientSocket.close();
             serverSocket.close();
@@ -70,6 +71,11 @@ public class SocketServidor {
         } else if (peticion[0].equals("RNU")){
             Cuenta c = new Cuenta(peticion[1],peticion[2]);
             c.setNombreUArchivo(peticion[3]);
+        } else if (peticion[0].equals("AL1")){
+            System.out.println("peticion de actualizar menu");
+            GestorS gS = new GestorS();
+            out.println(gS.stringMenu());
+
         }
         out.close();
         outputStream.close();

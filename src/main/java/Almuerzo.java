@@ -91,14 +91,7 @@ public class Almuerzo {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = descripcion;}
     }
 
-    public List<String> getIngredientes() {
-        return ingredientes;
-    }
 
-    public void setIngredientes(List<String> ingredientes) {
-        this.ingredientes = ingredientes;
-    }
-}

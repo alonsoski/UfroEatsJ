@@ -6,6 +6,8 @@ import java.util.Scanner;
 //CU2--Crear usuario
 //NU --Nombre de usuario definido
 //RNU--Registrar nombre de usuario
+//AL1--almuerzos del dia
+//AL2--almuerzoz
 public class Cliente {
     public static void main(String[] args) {
 lobby();
@@ -125,10 +127,22 @@ lobby();
         switchHome(eleccion,datos);
     }
 
+    private static ArrayList<Almuerzo> actualizacionComidas() {
+        SocketCliente s = new SocketCliente(8888);
+        ArrayList<Almuerzo> menu = new ArrayList<>();
+        String stringMenu = s.enviarYRecibir("AL1");
+        String[] str = stringMenu.split("-");
+        for (int i = 0; i <str.length ; i++) {
+            Almuerzo a = new Almuerzo(str[i].split("/")[0],2500,str[i].split("/")[1]);
+            menu.add(a);
+        }
+        return menu;
+    }
+
     private static void switchHome(int eleccion,ArrayList<String> datos ) {
         switch (eleccion){
             case 1:
-                //mostrarComidasDisponibles();
+                mostrarComidasDisponibles();
                 home(datos);
                 break;
             case 2:
@@ -145,7 +159,16 @@ lobby();
                 break;
             case 5:
                 System.out.println("ok, adios");
+                lobby();
                 break;
+        }
+    }
+
+    private static void mostrarComidasDisponibles() {
+        ArrayList<Almuerzo> menu = actualizacionComidas();
+        for (int i = 0; i < menu.size() ; i++) {
+            System.out.println("Comida: "+menu.get(i).getNombre());
+            System.out.println("Descripcion: "+menu.get(i).getDescripcion());
         }
     }
 
