@@ -61,7 +61,7 @@ public class SocketServidor {
         } else if (peticion[0].equals("CU2")) {
             Cuenta c = new Cuenta(peticion[1],peticion[2]);
             System.out.println("peticion crear Usuario");
-            System.out.println("el ip recibiente es:"+this.ip);
+            System.out.println("el ip recibiente es:"+this.ipLocal);
             c.crearCuenta();
         }
         out.close();
