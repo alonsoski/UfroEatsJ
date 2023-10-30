@@ -7,21 +7,37 @@ public class Almuerzo {
     private String nombre;
     private int precio;
     private String descripcion;
-    private List<String> ingredientes;
 
-    public Almuerzo(String nombre, int precio, String descripcion, List<String> ingredientes) {
+    public Almuerzo(String nombre, int precio, String descripcion) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
-        this.ingredientes = ingredientes;
     }
     public Almuerzo(){
 
     }
+    public Almuerzo rehacerAmuerzo(String archivo){
+        Almuerzo retorno=new Almuerzo();
+        String textoA="";
+        try {
+            File fichero= new File(archivo);
+            FileReader fr = new FileReader (fichero);
+            BufferedReader br = new BufferedReader(fr);
+            String linea;
+            while((linea=br.readLine())!=null){
+                textoA+=linea;
+            }
+            retorno.setNombre(textoA.split("/")[0]);
+            retorno.setDescripcion(textoA.split("/")[1]);
+            retorno.setPrecio(Integer.parseInt(textoA.split("/")[2]));
+        }catch (Exception e){
+            System.out.println("ha habido un error en leer la linea:"+e);
+        }
+        return retorno;
+    }
     public  ArrayList<Almuerzo> getAlmuerzos(String carpetaA){
         ArrayList<Almuerzo> retorno = new ArrayList<>();
-        File carpeta = new File("./Pedidos/"+carpetaA+"/02-almuerzos");
-        String[] lista = carpeta.list();
+        String[] lista = new File("./Pedidos/"+carpetaA+"/02-almuerzos").list();
         for (int i = 0; i < lista.length ; i++) {
             File carpetaB = new File("./Pedidos/"+carpetaA+"/02-almuerzos/"+lista[i]);
             Almuerzo a = obtenerAlmuerzo(carpetaB);
@@ -35,27 +51,7 @@ public class Almuerzo {
         String nombre=lista[0].replace("01-","");
         int precio = Integer.parseInt(lista[1].replace("02-",""));
         String descripcion = obtenerDescripcion(carpetaB);
-        List<String> ingredientes = obtenerIngredientes(carpetaB);
-        return new Almuerzo(nombre,precio,descripcion,ingredientes);
-    }
-
-    private List<String> obtenerIngredientes(File carpetaB) {
-        String ingredientes="";
-        List<String> retorno = new ArrayList<String>();
-        File aIngredientes=new File(carpetaB.getPath()+"/04-ingredientes.txt");
-        try {
-            FileReader fr = new FileReader (aIngredientes);
-            BufferedReader br = new BufferedReader(fr);
-            String linea;
-            while((linea=br.readLine())!=null){
-                ingredientes+=linea;
-            }
-        }catch (Exception e){
-            System.out.println("ha habido un error en ingredientes:"+e);
-        }
-        String[] arrayIngre= ingredientes.split("/");
-        retorno = Arrays.asList(arrayIngre);
-        return retorno;
+        return new Almuerzo(nombre,precio,descripcion);
     }
 
     private String obtenerDescripcion(File carpetaB) {

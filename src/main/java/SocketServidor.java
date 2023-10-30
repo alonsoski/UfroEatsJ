@@ -63,6 +63,13 @@ public class SocketServidor {
             System.out.println("peticion crear Usuario");
             System.out.println("el ip recibiente es:"+this.ipLocal);
             c.crearCuenta();
+        } else if (peticion[0].equals("NU")) {
+            Cuenta c = new Cuenta(peticion[1],peticion[2]);
+            System.out.println("Peticion nombre usuario");
+            out.println(c.getNombreUArchivo());
+        } else if (peticion[0].equals("RNU")){
+            Cuenta c = new Cuenta(peticion[1],peticion[2]);
+            c.setNombreUArchivo(peticion[3]);
         }
         out.close();
         outputStream.close();

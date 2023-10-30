@@ -14,6 +14,7 @@ public class Cuenta {
     public Cuenta(String coreo, String contrasena) {
         this.correo = coreo;
         this.contrasena = contrasena;
+        this.nombreU = "n/r";
     }
 
     public boolean canCreateUser(){
@@ -74,7 +75,6 @@ public class Cuenta {
                 while((linea=br.readLine())!=null){
                     contraAuxiliar+=linea;
                 }
-
             }catch (Exception e){
                 System.out.println("ha habido un error en ingredientes:"+e);
             }
@@ -106,11 +106,34 @@ public class Cuenta {
         this.contrasena = contrasena;
     }
 
-    public String getNombreU() {
+    public String getNombreUArchivo() {
+        String nombreU="";
+        File archivoNombre= new File("./Cuentas/"+this.correo+"/nombreU.txt");
+        if (!archivoNombre.exists()){
+            return "n/r";
+        }else {
+            try {
+                FileReader fr = new FileReader (archivoNombre);
+                BufferedReader br = new BufferedReader(fr);
+                String linea;
+                while((linea=br.readLine())!=null){
+                    nombreU+=linea;
+                }
+            }catch (Exception e){
+                System.out.println("ha habido un error al leer el nombre:"+e);
+            }
+        }
         return nombreU;
     }
 
-    public void setNombreU(String nombreU) {
-        this.nombreU = nombreU;
+    public void setNombreUArchivo(String nombreU) {
+        try {
+            File archivo = new File("./Cuentas/"+this.correo+"/nombreU.txt");
+            FileWriter fW = new FileWriter(archivo,true);
+            fW.write(nombreU);
+            fW.close();
+        }catch (Exception e){
+            System.out.println("error al escribir el nombre de usuario:"+e);
+        }
     }
 }
