@@ -22,15 +22,24 @@ public class Cuenta {
     public void crearCuenta(){
         crearCarpetaCuenta();
         crearArchivoContrasena();
+        escribirContrasna();
+    }
+
+    private void escribirContrasna() {
+        try {
+            File archivo = new File("./Cuentas/"+this.correo+"/contraseña.txt");
+            FileWriter fW = new FileWriter(archivo,true);
+            fW.write(this.contrasena);
+            fW.close();
+        }catch (Exception e){
+            System.out.println("error al escribir la contraseña:"+e);
+        }
     }
 
     private void crearArchivoContrasena() {
         File archivo = new File("./Cuentas/"+this.correo+"/contraseña.txt");
         try {
             archivo.createNewFile();
-            FileWriter fW = new FileWriter(archivo);
-            PrintWriter pW = new PrintWriter(fW);
-            pW.println(this.contrasena);
         }catch (Exception e){
             System.out.println("no se ha podido el archivo contrasena");
         }
