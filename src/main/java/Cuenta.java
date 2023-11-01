@@ -4,17 +4,10 @@ public class Cuenta {
     private String correo;
     private String contrasena;
 
-    private String nombreU;
-    private boolean existe=usuarioExiste();
-    public Cuenta(String coreo, String contrasena, String nombreU) {
-        this.correo = coreo;
-        this.contrasena = contrasena;
-        this.nombreU = nombreU;
-    }
+
     public Cuenta(String coreo, String contrasena) {
         this.correo = coreo;
         this.contrasena = contrasena;
-        this.nombreU = "n/r";
     }
 
     public boolean canCreateUser(){

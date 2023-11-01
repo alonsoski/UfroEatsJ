@@ -17,13 +17,10 @@ public class SocketServidor {
             System.out.println("ha habido un error");
         }
         return ip;
-
     }
-
     public SocketServidor(int puerto) {
         this.puerto = puerto;
     }
-
     public SocketServidor(String ip, int puerto) {
         this.puerto = puerto;
         this.ip = ip;
@@ -46,40 +43,59 @@ public class SocketServidor {
         }
         return retorno;
     }
-
     private void switchPeticiones(String[] peticion, Socket clientSocket) throws IOException {
         OutputStream outputStream = clientSocket.getOutputStream();
         PrintWriter out = new PrintWriter(outputStream, true);
         if (peticion[0].equals("IS")){
-            Cuenta c = new Cuenta(peticion[1],peticion[2]);
-            System.out.println("peticion inicion de sesion");
-            out.println(c.usuarioExiste());
+            peticionIS(peticion,out);
         } else if (peticion[0].equals("CU1")) {
-            Cuenta c = new Cuenta(peticion[1],peticion[2]);
-            System.out.println("peticion es posible crear usuario");
-            out.println(c.canCreateUser());
-
+            peticionCU1(peticion,out);
         } else if (peticion[0].equals("CU2")) {
-            Cuenta c = new Cuenta(peticion[1],peticion[2]);
-            System.out.println("peticion crear Usuario");
-            System.out.println("el ip recibiente es:"+this.ipLocal);
-            c.crearCuenta();
+            peticionCU2(peticion,out);
         } else if (peticion[0].equals("NU")) {
-            Cuenta c = new Cuenta(peticion[1],peticion[2]);
-            System.out.println("Peticion nombre usuario");
-            out.println(c.getNombreUArchivo());
+            peticionNU(peticion,out);
         } else if (peticion[0].equals("RNU")){
-            Cuenta c = new Cuenta(peticion[1],peticion[2]);
-            c.setNombreUArchivo(peticion[3]);
+            peticionRNU(peticion);
         } else if (peticion[0].equals("AL1")){
-            System.out.println("peticion de actualizar menu");
-            GestorS gS = new GestorS();
-            out.println(gS.stringMenu());
-
+            peticionAL1(out);
         }
         out.close();
         outputStream.close();
+    }
 
+    private void peticionAL1( PrintWriter out) {
+        System.out.println("peticion de actualizar menu");
+        GestorS gS = new GestorS();
+        out.println(gS.stringMenu());
+    }
+
+    private void peticionRNU(String[] peticion) {
+        Cuenta c = new Cuenta(peticion[1],peticion[2]);
+        c.setNombreUArchivo(peticion[3]);
+    }
+
+    private void peticionNU(String[] peticion, PrintWriter out) {
+        Cuenta c = new Cuenta(peticion[1],peticion[2]);
+        System.out.println("Peticion nombre usuario");
+        out.println(c.getNombreUArchivo());
+    }
+
+    private void peticionCU2(String[] peticion, PrintWriter out) {
+        Cuenta c = new Cuenta(peticion[1],peticion[2]);
+        System.out.println("peticion crear Usuario");
+        c.crearCuenta();
+    }
+
+    private void peticionCU1(String[] peticion, PrintWriter out) {
+        Cuenta c = new Cuenta(peticion[1],peticion[2]);
+        System.out.println("peticion es posible crear usuario");
+        out.println(c.canCreateUser());
+    }
+
+    private void peticionIS(String[] peticion, PrintWriter out) {
+        Cuenta c = new Cuenta(peticion[1],peticion[2]);
+        System.out.println("peticion inicion de sesion");
+        out.println(c.usuarioExiste());
     }
 
 }

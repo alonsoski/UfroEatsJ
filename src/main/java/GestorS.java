@@ -7,7 +7,7 @@ import java.util.List;
 public class GestorS {
     public GestorS(){}
 
-    public static void verPedidos(){
+    public void verPedidos(){
         ArrayList<Pedido>pedidos=listarPedidos();
         for (int i = 0; i <pedidos.size() ; i++) {
             System.out.println("Nombre Usuario:"+pedidos.get(i).getNombreU().substring(3));
