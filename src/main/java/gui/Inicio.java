@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class Inicio extends JFrame {
 
     public Inicio() {
+
         this.setSize(720, 480);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -22,6 +23,9 @@ public class Inicio extends JFrame {
 
         botonRegistrar.setBounds(276,303,151,27);
         //botonRegistrar.setVisible(false);
+
+
+
         botonRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

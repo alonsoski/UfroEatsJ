@@ -33,7 +33,26 @@ public class SignIn extends JFrame {
 
         JButton botonIngresar=new JButton("Ingresar");
         botonIngresar.setBounds(390,400,90,20);
+        botonIngresar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Login login = new Login();
+                dispose();
+            }
+        });
 
+        JButton botonVolver=new JButton("Volver");
+        botonVolver.setBounds(30,20,90,20);
+        botonVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Inicio i = new Inicio();
+                i.setVisible(true);
+                dispose();
+            }
+        });
+
+        panelPrincipal.add(botonVolver);
         panelPrincipal.add(botonRegistrar);
         panelPrincipal.add(botonIngresar);
         panelPrincipal.add(correo);

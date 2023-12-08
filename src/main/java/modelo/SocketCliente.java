@@ -1,11 +1,13 @@
+package modelo;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-
+p
 public class SocketCliente {
     private int puerto;
-    private String ip = obtenerIp();
+    private String ip = obtenerIp();//obtenerIp();
 
     private String obtenerIp() {
         String ip = "";

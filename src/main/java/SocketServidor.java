@@ -66,7 +66,7 @@ public class SocketServidor {
     private void peticionAL1( PrintWriter out) {
         System.out.println("peticion de actualizar menu");
         GestorS gS = new GestorS();
-        out.println(gS.stringMenu());
+        out.println(gS.stringMenu1());
     }
 
     private void peticionRNU(String[] peticion) {

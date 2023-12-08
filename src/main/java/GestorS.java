@@ -15,12 +15,22 @@ public class GestorS {
         }
     }
 
-    public String stringMenu(){
+    public String stringMenu1(){
         String retorno ="";
         File almuerzoDia = new File("./Almuerzos/AlmuerzosDelDia");
         String[] lista = almuerzoDia.list();
         for (int i = 0; i < lista.length ; i++) {
             File almuerzo = new File("./Almuerzos/AlmuerzosDelDia/"+lista[i]);
+            retorno+=leerLinea(almuerzo);
+            retorno+="-";
+        }
+        return retorno;
+    }public String stringMenu2(){
+        String retorno ="";
+        File almuerzoDia = new File("./Almuerzos/Almuerzos");
+        String[] lista = almuerzoDia.list();
+        for (int i = 0; i < lista.length ; i++) {
+            File almuerzo = new File("./Almuerzos/Almuerzos/"+lista[i]);
             retorno+=leerLinea(almuerzo);
             retorno+="-";
         }

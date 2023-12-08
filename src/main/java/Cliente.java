@@ -1,10 +1,12 @@
+import modelo.SocketCliente;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 //-------Codigos de peticiones---------
 //IS --Incio de Sesion
 //CU1--Se puede crear un usario
 //CU2--Crear usuario
-//NU --Nombre de usuario definido
+//NU --Nombre de usuario
 //RNU--Registrar nombre de usuario
 //AL1--almuerzos del dia
 //AL2--almuerzoz
@@ -127,16 +129,26 @@ lobby();
         switchHome(eleccion,datos);
     }
 
-    private static ArrayList<Almuerzo> actualizacionComidas() {
+    private static ArrayList<ArrayList<Almuerzo>> actualizacionComidas() {
         SocketCliente s = new SocketCliente(8888);
-        ArrayList<Almuerzo> menu = new ArrayList<>();
+        ArrayList<ArrayList<Almuerzo>> menuRetorno=new ArrayList<ArrayList<Almuerzo>>();
+        ArrayList<Almuerzo> menuGeneral = new ArrayList<>();
+        ArrayList<Almuerzo> menuDelDia = new ArrayList<>();
         String stringMenu = s.enviarYRecibir("AL1");
-        String[] str = stringMenu.split("-");
-        for (int i = 0; i <str.length ; i++) {
-            Almuerzo a = new Almuerzo(str[i].split("/")[0],2500,str[i].split("/")[1]);
-            menu.add(a);
+        String[] str1 = stringMenu.split("_");
+        String[] strDia = str1[0].split("-");
+        for (int i = 0; i <strDia.length ; i++) {
+            Almuerzo a = new Almuerzo(strDia[i].split("/")[0],2500,strDia[i].split("/")[1]);
+            menuDelDia.add(a);
         }
-        return menu;
+        menuRetorno.add(menuDelDia);
+        String[] strGral = str1[1].split("-");
+        for (int i = 0; i <strGral.length ; i++) {
+            Almuerzo a = new Almuerzo(strGral[i].split("/")[0],Integer.parseInt(strGral[i].split("/")[2]),strGral[i].split("/")[1]);
+            menuGeneral.add(a);
+        }
+        menuRetorno.add(menuGeneral);
+        return menuRetorno;
     }
 
     private static void switchHome(int eleccion,ArrayList<String> datos ) {
@@ -165,10 +177,18 @@ lobby();
     }
 
     private static void mostrarComidasDisponibles() {
-        ArrayList<Almuerzo> menu = actualizacionComidas();
-        for (int i = 0; i < menu.size() ; i++) {
-            System.out.println("Comida: "+menu.get(i).getNombre());
-            System.out.println("Descripcion: "+menu.get(i).getDescripcion());
+        ArrayList<ArrayList<Almuerzo>> menu = actualizacionComidas();
+        for (int i = 0; i < menu.get(0).size() ; i++) {
+            System.out.println(i+1+".-");
+            System.out.println("Comida del dia: "+menu.get(0).get(i).getNombre());
+            System.out.println("Descripcion: "+menu.get(0).get(i).getDescripcion());
+        }
+        System.out.println("------------------------------------------------------");
+        System.out.println("------------------------------------------------------");
+        for (int i = 0; i < menu.get(1).size() ; i++) {
+            System.out.println(i+1+".-");
+            System.out.println("Comida General: "+menu.get(1).get(i).getNombre());
+            System.out.println("Descripcion: "+menu.get(1).get(i).getDescripcion());
         }
     }
 
