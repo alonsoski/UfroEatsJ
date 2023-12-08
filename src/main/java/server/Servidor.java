@@ -1,3 +1,5 @@
+package server;
+
 import java.util.Scanner;
 
 public class Servidor extends Thread {
@@ -11,8 +13,8 @@ public class Servidor extends Thread {
         int eleccion= 0;
         while (eleccion<1 || eleccion>3){
             System.out.println("1.-Ver Pedidos");
-            System.out.println("2.-Despachar Pedido");
-            System.out.println("3.-Cancelar Pedido");
+            System.out.println("2.-Despachar server.Pedido");
+            System.out.println("3.-Cancelar server.Pedido");
             eleccion = eleccion(3);
         }
         switchServer(eleccion);

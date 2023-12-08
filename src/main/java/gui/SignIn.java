@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
+import modelo.SocketCliente;
 
 import javax.swing.*;
 
@@ -30,6 +32,33 @@ public class SignIn extends JFrame {
 
         JButton botonRegistrar=new JButton("Registrar");
         botonRegistrar.setBounds(305,376,90,20);
+
+        botonRegistrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (contra.getText().equals(contra2.getText())){
+                    if(!correoInstitucional(correo.getText())) {
+                        JOptionPane.showMessageDialog(SignIn.this,"Este correo no es valido, debe ser institucional.","correo invalido",JOptionPane.ERROR_MESSAGE);
+                    }else {
+                        SocketCliente s = new SocketCliente(8888);
+                        String peticion= s.enviarYRecibir("CU1/"+correo.getText()+"/"+contra.getText());
+                        if (peticion.equals("true")){
+                            s.enviar("CU2/"+correo.getText()+"/"+contra.getText());
+                            JOptionPane.showMessageDialog(SignIn.this,"server.Cuenta creada.","coreo valido",JOptionPane.ERROR_MESSAGE);
+                            Inicio i = new Inicio();
+                            i.setVisible(true);
+                            dispose();
+                        } else if (contra.getText().length()<8) {
+                            JOptionPane.showMessageDialog(SignIn.this,"la contraseña debe ser como minimo de 8 caracteres.","contraseña incorrecta",JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(SignIn.this,"Este correo ya fue ingresado.","correo invalido",JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(SignIn.this,"Contraseñas no coinciden.","error contraseña",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         JButton botonIngresar=new JButton("Ingresar");
         botonIngresar.setBounds(390,400,90,20);
@@ -61,6 +90,19 @@ public class SignIn extends JFrame {
 
 
         this.add(panelPrincipal);
+    }
+    private static Boolean correoInstitucional(String correo) {
+        if (correo.length()<=12){
+            System.out.println("el correo es invalido");
+            return false;
+        }else{
+            if (!correo.substring(correo.length()-12).equals("@ufromail.cl")){
+                System.out.println("el correo es invalido");
+                return false;
+            }else {
+                return true;
+            }
+        }
     }
 
     public static void main(String[] args) {

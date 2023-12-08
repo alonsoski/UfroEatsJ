@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -18,13 +20,15 @@ public class Login extends JFrame {
         PanelConImagen panelPrincipal = new PanelConImagen();
         panelPrincipal.setLayout(null);
         panelPrincipal.setBackground("./data/images/fondoIngresar.png");
+
+
         JTextField correo= new JTextField(15);
         correo.setText("Correo");
         correo.setBounds(200,320,300,20);
+
         JTextField contra= new JTextField(15);
         contra.setText("Contraseña");
         contra.setBounds(200,350,300,20);
-
 
         JButton botonIngresar=new JButton("Ingresar");
         botonIngresar.setBounds(305,376,90,20);
@@ -32,16 +36,21 @@ public class Login extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SocketCliente s = new SocketCliente(8888);
-                String peticion = s.enviarYRecibir("IS/"+correo.getText()+"/"+contra.getText());
-                if (peticion.equals("true")){
-                    //home(correo);
-                    System.out.println("has ingresado");
-                }else{
-                    System.out.println("Nombre o contraseña incorrectos");
-                    JOptionPane.showMessageDialog(this.getParent(),"correo o contraseña incorrectas","incorrecto",JOptionPane.WARNING_MESSAGE);
-                    Inicio inicio = new Inicio();
-                    inicio.setVisible(true);
-                    dispose();
+                if (correo.getText().equals("")|| contra.getText().equals("")){
+                    JOptionPane.showMessageDialog(Login.this,"Escriba su correo y contraseña.","error de autenticacion",JOptionPane.ERROR_MESSAGE);
+                }else {
+                    String peticion = s.enviarYRecibir("IS/"+correo.getText()+"/"+contra.getText());
+                    if (peticion.equals("true")){
+                        //home(correo);
+                        System.out.println("has ingresado");
+                    } else if (peticion.equals("errorServidor")) {
+                        JOptionPane.showMessageDialog(Login.this,"Hay problemas con el servidor.","error de conexion",JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        System.out.println("Nombre o contraseña incorrectos");
+                        JOptionPane.showMessageDialog(Login.this,"nombre o contraseña incorrectos.","error de autenticacion",JOptionPane.ERROR_MESSAGE);
+                        correo.setText("");
+                        contra.setText("");
+                    }
                 }
             }
         });
@@ -74,10 +83,6 @@ public class Login extends JFrame {
         panelPrincipal.add(botonRegistrar);
         panelPrincipal.add(correo);
         panelPrincipal.add(contra);
-
-
-
-
 
         this.add(panelPrincipal);
     }
