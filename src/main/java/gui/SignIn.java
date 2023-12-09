@@ -1,14 +1,10 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
 import modelo.SocketCliente;
-
-import javax.swing.*;
 
 public class SignIn extends JFrame {
 
@@ -17,9 +13,14 @@ public class SignIn extends JFrame {
         this.setSize(720, 480);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setTitle("crear usuario");
         PanelConImagen panelPrincipal = new PanelConImagen();
         panelPrincipal.setLayout(null);
         panelPrincipal.setBackground("./data/images/fondoCrearCuenta.png");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
         JTextField correo= new JTextField(15);
         correo.setText("Correo");
         correo.setBounds(200,300,300,20);

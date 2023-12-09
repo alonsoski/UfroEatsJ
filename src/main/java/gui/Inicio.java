@@ -11,9 +11,12 @@ public class Inicio extends JFrame {
         this.setSize(720, 480);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setTitle("inicio");
         PanelConImagen panelPrincipal = new PanelConImagen();
         panelPrincipal.setLayout(null);
+
         panelPrincipal.setBackground("./data/images/fondoInicio.png");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
         JButton botonIngresar=new JButton("Ingresar");
@@ -24,15 +27,11 @@ public class Inicio extends JFrame {
         botonRegistrar.setBounds(276,303,151,27);
         //botonRegistrar.setVisible(false);
 
-
-
         botonRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 SignIn sign = new SignIn();
                 dispose();
-
             }
         });
         botonIngresar.addActionListener(new ActionListener() {

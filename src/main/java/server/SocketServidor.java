@@ -80,6 +80,7 @@ public class SocketServidor {
         Cuenta c = new Cuenta(peticion[1],peticion[2]);
         System.out.println("Peticion nombre usuario");
         out.println(c.getNombreUArchivo());
+        System.out.println(c.getNombreUArchivo());
     }
 
     private void peticionCU2(String[] peticion, PrintWriter out) {
@@ -98,6 +99,7 @@ public class SocketServidor {
         Cuenta c = new Cuenta(peticion[1],peticion[2]);
         System.out.println("peticion inicion de sesion");
         out.println(c.usuarioExiste());
+
     }
 
 }

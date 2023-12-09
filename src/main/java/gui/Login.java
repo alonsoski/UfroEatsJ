@@ -1,13 +1,9 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.util.ArrayList;
-import javax.swing.*;
+
 
 import modelo.SocketCliente;
 public class Login extends JFrame {
@@ -17,9 +13,11 @@ public class Login extends JFrame {
         this.setSize(720, 480);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.setTitle("inicio de sesion");
         PanelConImagen panelPrincipal = new PanelConImagen();
         panelPrincipal.setLayout(null);
         panelPrincipal.setBackground("./data/images/fondoIngresar.png");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
         JTextField correo= new JTextField(15);
@@ -41,8 +39,12 @@ public class Login extends JFrame {
                 }else {
                     String peticion = s.enviarYRecibir("IS/"+correo.getText()+"/"+contra.getText());
                     if (peticion.equals("true")){
-                        //home(correo);
+                        RegistroNombreUsuario rNU= new RegistroNombreUsuario(correo.getText());
+                        rNU.setVisible(true);
+                        //Home h = new Home(correo.getText());
+                        //h.setVisible(true);
                         System.out.println("has ingresado");
+                        dispose();
                     } else if (peticion.equals("errorServidor")) {
                         JOptionPane.showMessageDialog(Login.this,"Hay problemas con el servidor.","error de conexion",JOptionPane.ERROR_MESSAGE);
                     } else {
