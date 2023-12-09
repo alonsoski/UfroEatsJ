@@ -5,6 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Inicio extends JFrame {
+    PanelConImagen panelPrincipal;
+    JButton botonIngresar;
+    JButton botonRegistrar;
 
     public Inicio() {
 
@@ -12,20 +15,18 @@ public class Inicio extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("inicio");
-        PanelConImagen panelPrincipal = new PanelConImagen();
+        panelPrincipal = new PanelConImagen();
         panelPrincipal.setLayout(null);
 
         panelPrincipal.setBackground("./data/images/fondoInicio.png");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        JButton botonIngresar=new JButton("Ingresar");
+        botonIngresar=new JButton("Ingresar");
         botonIngresar.setBounds(262,234,187,43);
-        //botonIngresar.setVisible(false);
-        JButton botonRegistrar=new JButton("Registrar");
 
+        botonRegistrar=new JButton("Registrar");
         botonRegistrar.setBounds(276,303,151,27);
-        //botonRegistrar.setVisible(false);
 
         botonRegistrar.addActionListener(new ActionListener() {
             @Override

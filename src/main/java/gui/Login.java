@@ -7,6 +7,12 @@ import java.awt.event.ActionListener;
 
 import modelo.SocketCliente;
 public class Login extends JFrame {
+    PanelConImagen panelPrincipal;
+    JTextField correo;
+    JTextField contra;
+    JButton botonIngresar;
+    JButton botonRegistrar;
+    JButton botonVolver;
 
     public Login() {
         this.setVisible(true);
@@ -14,21 +20,21 @@ public class Login extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setTitle("inicio de sesion");
-        PanelConImagen panelPrincipal = new PanelConImagen();
+        panelPrincipal = new PanelConImagen();
         panelPrincipal.setLayout(null);
         panelPrincipal.setBackground("./data/images/fondoIngresar.png");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        JTextField correo= new JTextField(15);
+        correo= new JTextField(15);
         correo.setText("Correo");
         correo.setBounds(200,320,300,20);
 
-        JTextField contra= new JTextField(15);
+        contra= new JTextField(15);
         contra.setText("Contraseña");
         contra.setBounds(200,350,300,20);
 
-        JButton botonIngresar=new JButton("Ingresar");
+        botonIngresar=new JButton("Ingresar");
         botonIngresar.setBounds(305,376,90,20);
         botonIngresar.addActionListener(new ActionListener() {
             @Override
@@ -57,7 +63,7 @@ public class Login extends JFrame {
             }
         });
 
-        JButton botonRegistrar=new JButton("Registrar");
+        botonRegistrar=new JButton("Registrar");
         botonRegistrar.setBounds(390,400,90,20);
         botonRegistrar.addActionListener(new ActionListener() {
             @Override
@@ -68,7 +74,7 @@ public class Login extends JFrame {
         });
 
 
-        JButton botonVolver=new JButton("Volver");
+        botonVolver=new JButton("Volver");
         botonVolver.setBounds(30,20,90,20);
         botonVolver.addActionListener(new ActionListener() {
             @Override

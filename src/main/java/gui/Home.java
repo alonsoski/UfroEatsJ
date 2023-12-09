@@ -11,7 +11,10 @@ import java.util.Scanner;
 
 public class Home extends JFrame {
     String nombreUsuario;
-
+    PanelConImagen panelPrincipal;
+    JButton botonNuevoPedido;
+    JButton botonHistorial;
+    JButton terminarSesion;
     public Home(){
         setupPrincipal("q@ufromail.cl");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -26,12 +29,12 @@ public class Home extends JFrame {
         this.setSize(720, 480);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        PanelConImagen panelPrincipal = new PanelConImagen();
+        panelPrincipal = new PanelConImagen();
         panelPrincipal.setLayout(null);
         panelPrincipal.setBackground("./data/images/fondoHome.png");
 
 
-        JButton botonNuevoPedido=new JButton("Nuevo Pedido");
+        botonNuevoPedido=new JButton("Nuevo Pedido");
         botonNuevoPedido.setBounds(213,167,275,43);
         botonNuevoPedido.setBorder(new RoundBorder(25));
         botonNuevoPedido.setContentAreaFilled(false);
@@ -39,7 +42,7 @@ public class Home extends JFrame {
         botonNuevoPedido.setFocusPainted(false);
 
 
-        JButton botonHistorial=new JButton("Historial de pedidos");
+        botonHistorial=new JButton("Historial de pedidos");
         botonHistorial.setBounds(213,246,275,43);
         botonHistorial.setBorder(new RoundBorder(25));
         botonHistorial.setContentAreaFilled(false);
@@ -47,7 +50,7 @@ public class Home extends JFrame {
         botonHistorial.setFocusPainted(false);
 
 
-        JButton terminarSesion= new JButton("Cerrar sesión");
+        terminarSesion= new JButton("Cerrar sesión");
         terminarSesion.setBounds(290,298,120,30);
         terminarSesion.addActionListener(new ActionListener() {
             @Override

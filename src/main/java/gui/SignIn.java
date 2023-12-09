@@ -7,6 +7,13 @@ import java.awt.event.ActionListener;
 import modelo.SocketCliente;
 
 public class SignIn extends JFrame {
+    PanelConImagen panelPrincipal;
+    JTextField correo;
+    JTextField contra;
+    JTextField contra2;
+    JButton botonRegistrar;
+    JButton botonIngresar;
+    JButton botonVolver;
 
     public SignIn() {
         this.setVisible(true);
@@ -21,17 +28,17 @@ public class SignIn extends JFrame {
 
 
 
-        JTextField correo= new JTextField(15);
+        correo= new JTextField(15);
         correo.setText("Correo");
         correo.setBounds(200,300,300,20);
-        JTextField contra= new JTextField(15);
+        contra= new JTextField(15);
         contra.setText("Contraseña ");
         contra.setBounds(200,325,300,20);
-        JTextField contra2= new JTextField(15);
+        contra2= new JTextField(15);
         contra2.setText("Repetir Contraseña");
         contra2.setBounds(200,350,300,20);
 
-        JButton botonRegistrar=new JButton("Registrar");
+        botonRegistrar=new JButton("Registrar");
         botonRegistrar.setBounds(305,376,90,20);
 
         botonRegistrar.addActionListener(new ActionListener() {
@@ -61,7 +68,7 @@ public class SignIn extends JFrame {
             }
         });
 
-        JButton botonIngresar=new JButton("Ingresar");
+        botonIngresar=new JButton("Ingresar");
         botonIngresar.setBounds(390,400,90,20);
         botonIngresar.addActionListener(new ActionListener() {
             @Override
@@ -71,7 +78,7 @@ public class SignIn extends JFrame {
             }
         });
 
-        JButton botonVolver=new JButton("Volver");
+        botonVolver=new JButton("Volver");
         botonVolver.setBounds(30,20,90,20);
         botonVolver.addActionListener(new ActionListener() {
             @Override
