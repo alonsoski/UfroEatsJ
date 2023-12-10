@@ -134,7 +134,7 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource()== botonRegistrarse){
-            CrearCuenta newAccount = new CrearCuenta();
+            VentanaRegistro newAccount = new VentanaRegistro();
         }
 
         if (e.getSource()== botonIngresar) {
