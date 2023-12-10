@@ -53,9 +53,9 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         botonRegistrarse.setBounds(560,610,120,50);
         botonRegistrarse.addActionListener(this);
 
-        botonCarrito = new JButton();
-        botonCarrito.setIcon(iconoCarrito);
-        //botonCarrito.setFont(new Font("Comic Sans MS",Font.BOLD,15));
+        botonCarrito = new JButton("Carrito");
+        //botonCarrito.setIcon(iconoCarrito);
+        botonCarrito.setFont(new Font("Comic Sans MS",Font.BOLD,15));
         botonCarrito.setBounds(1140,10,120,50);
         botonCarrito.addActionListener(this);
 
