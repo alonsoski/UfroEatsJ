@@ -3,14 +3,21 @@ package model;
 public class Producto {
 
     private String nombre, descripcion;
-    private int stock, precio;
+    private int cantidad, precio;
 
-    public Producto(String nombre, String descripcion, int stock, int precio){
+    public Producto(String nombre, String descripcion, int cantidad, int precio){
 
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.stock = stock;
+        this.cantidad = cantidad;
         this.precio = precio;
+    }
+
+    public Producto(Producto x, int cantidad){
+        this.setNombre(x.getNombre());
+        this.setDescripcion(x.getDescripcion());
+        this.setCantidad(cantidad);
+        this.setPrecio(x.getPrecio()*cantidad);
     }
     public String getNombre() {
         return nombre;
@@ -28,12 +35,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public int getStock() {
-        return stock;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public int getPrecio() {
@@ -45,11 +52,11 @@ public class Producto {
     }
 
     void agregarStock(int x){
-        this.stock += x;
+        this.cantidad += x;
     }
 
     void quitarStock(int x){
-        this.stock -= x;
+        this.cantidad -= x;
     }
 
     @Override

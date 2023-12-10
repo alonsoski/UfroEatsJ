@@ -18,9 +18,9 @@ public class VentanaCarrito extends JFrame implements ActionListener, ListSelect
     JPanel panelBotones;
     Carrito carrito;
 
-    VentanaCarrito(){
+    VentanaCarrito(Carrito carrito){
 
-        carrito = new Carrito();
+        this.carrito = carrito;
 
         model = new DefaultListModel<>();
         productosCarrito = new JList<>(model);

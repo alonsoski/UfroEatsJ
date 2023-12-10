@@ -31,7 +31,7 @@ public class Inventario {
             for(Producto i : getListaInventario()){
                 for (Producto j : pedido.getPedido()){
                     if (i.getNombre().equals(j.getNombre())){
-                        i.quitarStock(j.getStock());
+                        i.quitarStock(j.getCantidad());
                     }
                 }
             }
@@ -49,7 +49,7 @@ public class Inventario {
 
         for(Producto i : getListaInventario()){
             for (Producto j : pedido.getPedido()){
-                if (i.getStock()< j.getStock()){
+                if (i.getCantidad()< j.getCantidad()){
                     disponibilidad = false;
                 }
             }
@@ -60,7 +60,7 @@ public class Inventario {
 
     public void mostarInventario(){
             for (Producto i : getListaInventario()){
-                System.out.println(i.getNombre()+" | "+i.getStock()+" | "+i.getPrecio());
+                System.out.println(i.getNombre()+" | "+i.getCantidad()+" | "+i.getPrecio());
             }
     }
 

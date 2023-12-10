@@ -1,5 +1,6 @@
 package gui;
 
+import model.Carrito;
 import model.Producto;
 
 import javax.swing.*;
@@ -24,8 +25,11 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
     JList<Producto> listaProductos;
     DefaultListModel<Producto> model;
     JSplitPane splitPane;
+    Carrito carrito;
 
     public PantallaInicio(){
+
+        carrito = new Carrito();
 
         fondo = new ImageIcon("bg.png");
         iconoUE = new ImageIcon("u.png");
@@ -158,7 +162,13 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         }
 
         if (e.getSource()==botonCarrito){
-            VentanaCarrito ventanaCarrito = new VentanaCarrito();
+            VentanaCarrito ventanaCarrito = new VentanaCarrito(carrito);
+        }
+
+        if (e.getSource()==botonAgregar){
+
+            carrito.agregarProducto(new Producto(listaProductos.getSelectedValue(), cantidad.getSelectedIndex()+1));
+
         }
 
     }
@@ -186,7 +196,7 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
 
         if (seleccionado != null){
             String infoProducto = "<html><b>Nombre:</b>" + seleccionado.getNombre() + "<br><b>Descripción:</b> " + seleccionado.getDescripcion()
-                    + "<br><b>Precio:</b> $" + seleccionado.getPrecio() + "<br><b>Stock:</b>  " + seleccionado.getStock()+ "</html>";
+                    + "<br><b>Precio:</b> $" + seleccionado.getPrecio() + "<br><b>Stock:</b>  " + seleccionado.getCantidad()+ "</html>";
             labelProducto.setText(infoProducto);
         }
 
