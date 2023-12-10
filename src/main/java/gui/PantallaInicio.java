@@ -26,6 +26,9 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
     DefaultListModel<Producto> model;
     JSplitPane splitPane;
     Carrito carrito;
+    VentanaCarrito ventanaCarrito;
+    VentanaRegistro ventanaRegistro;
+    VentanaHistorial ventanaHistorial;
 
     public PantallaInicio(){
 
@@ -134,7 +137,9 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource()== botonRegistrarse){
-            VentanaRegistro newAccount = new VentanaRegistro();
+            if (ventanaRegistro == null || !ventanaRegistro.isVisible()){
+                ventanaRegistro = new VentanaRegistro();
+            }
         }
 
         if (e.getSource()== botonIngresar) {
@@ -163,7 +168,9 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         }
 
         if (e.getSource()==botonCarrito){
-            VentanaCarrito ventanaCarrito = new VentanaCarrito(carrito);
+            if (ventanaCarrito == null || !ventanaCarrito.isVisible()){
+                ventanaCarrito = new VentanaCarrito(carrito);
+            }
         }
 
         if (e.getSource()==botonAgregar){
