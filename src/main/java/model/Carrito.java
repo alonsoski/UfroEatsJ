@@ -27,6 +27,6 @@ public class Carrito {
     }
 
     public void vaciarCarrito(){
-
+        productosCarrito.clear();
     }
 }
