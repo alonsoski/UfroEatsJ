@@ -67,6 +67,7 @@ public class VentanaCarrito extends JFrame implements ActionListener, ListSelect
         if(e.getSource()==botonPagar){
 
             carrito.vaciarCarrito();
+            model.clear();
             //aqui esto quedo asi nomas porque nunca decidimos en que forma se pagaba
             JOptionPane.showMessageDialog(null,"Gracias por su compra","Pago Realizado",JOptionPane.QUESTION_MESSAGE);
         }
