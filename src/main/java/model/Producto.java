@@ -61,6 +61,6 @@ public class Producto {
 
     @Override
     public String toString() {
-        return getNombre();
+        return getNombre()+"|| Cantidad: "+getCantidad()+"|| Precio: $"+getPrecio();
     }
 }
