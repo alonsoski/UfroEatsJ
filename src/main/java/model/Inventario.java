@@ -24,7 +24,7 @@ public class Inventario {
         listaInventario.remove(i);
     }
 
-    public void receiveOrder(Pedido pedido){
+    public void recibirPedido(Pedido pedido){
 
         if (disponibilidadStock(pedido)==true){
 
