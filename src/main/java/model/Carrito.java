@@ -17,7 +17,13 @@ public class Carrito {
     public void setProductosCarrito(ArrayList<Producto> productosCarrito) {
         Carrito.productosCarrito = productosCarrito;
     }
-
+    public int precioTotal(){
+        int total = 0;
+        for (Producto i : this.getProductosCarrito()){
+            total += i.getPrecio();
+        }
+        return total;
+    }
     public void agregarProducto(Producto producto){
         productosCarrito.add(producto);
     }

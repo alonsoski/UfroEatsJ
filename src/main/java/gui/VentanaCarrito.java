@@ -16,6 +16,7 @@ public class VentanaCarrito extends JFrame implements ActionListener, ListSelect
     DefaultListModel<Producto> model;
     JButton botonPagar, botonEliminar;
     JPanel panelBotones;
+    JLabel labelCostoTotal;
     Carrito carrito;
 
     VentanaCarrito(Carrito carrito){
@@ -31,24 +32,28 @@ public class VentanaCarrito extends JFrame implements ActionListener, ListSelect
 
         botonPagar = new JButton("Pagar");
         botonPagar.setFont(new Font("Comic Sans MS",Font.BOLD,10));
-        botonPagar.setBounds(1010,10,120,50);
+        //botonPagar.setBounds(1010,10,120,50);
         botonPagar.addActionListener(this);
 
         botonEliminar = new JButton("Eliminar");
         botonEliminar.setFont(new Font("Comic Sans MS",Font.BOLD,10));
-        botonEliminar.setBounds(1010,10,120,50);
+        //botonEliminar.setBounds(1010,10,120,50);
         botonEliminar.addActionListener(this);
+
+        labelCostoTotal = new JLabel("Costo Total: $" + carrito.precioTotal());
+        labelCostoTotal.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        labelCostoTotal.setHorizontalAlignment(JLabel.CENTER);
+
+        panelBotones = new JPanel();
+        panelBotones.add(botonEliminar);
+        panelBotones.add(botonPagar);
 
         Container container = getContentPane();
         container.setLayout(new BorderLayout());
 
         container.add(new JScrollPane(productosCarrito), BorderLayout.CENTER);
-
-        panelBotones = new JPanel();
-        panelBotones.add(botonEliminar);
-        panelBotones.add(botonPagar);
         container.add(panelBotones, BorderLayout.SOUTH);
-
+        container.add(labelCostoTotal, BorderLayout.NORTH);
 
 
         this.setTitle("Carrito de compras");
@@ -80,6 +85,7 @@ public class VentanaCarrito extends JFrame implements ActionListener, ListSelect
             if (indiceSeleccionado != -1) {
                 carrito.quitarProducto(indiceSeleccionado);
                 model.removeElementAt(indiceSeleccionado);
+                labelCostoTotal.setText("Costo Total: $" + carrito.precioTotal());
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione un producto para eliminar!", "ERROR CRITICO", JOptionPane.ERROR_MESSAGE);
             }

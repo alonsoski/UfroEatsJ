@@ -64,6 +64,7 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         botonAgregar = new JButton("Agregar al carro");
         botonAgregar.setFont(new Font("Comic Sans MS",Font.BOLD,15));
         botonAgregar.setBounds(130,420,170,50);
+        botonAgregar.setEnabled(false);
         botonAgregar.addActionListener(this);
 
 
@@ -198,6 +199,10 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
             String infoProducto = "<html><b>Nombre:</b>" + seleccionado.getNombre() + "<br><b>Descripción:</b> " + seleccionado.getDescripcion()
                     + "<br><b>Precio:</b> $" + seleccionado.getPrecio() + "<br><b>Stock:</b>  " + seleccionado.getCantidad()+ "</html>";
             labelProducto.setText(infoProducto);
+
+            botonAgregar.setEnabled(true);
+        } else {
+            botonAgregar.setEnabled(false);
         }
 
 
