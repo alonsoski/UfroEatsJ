@@ -20,6 +20,7 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
     JPasswordField contrasenia;
     JButton botonIngresar, botonRegistrarse, botonCarrito, botonHistorial, botonAgregar;
     JPanel panel1, panel2, panel3;
+    JComboBox cantidad;
     JList<Producto> listaProductos;
     DefaultListModel<Producto> model;
     JSplitPane splitPane;
@@ -29,6 +30,11 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         fondo = new ImageIcon("bg.png");
         iconoUE = new ImageIcon("u.png");
         iconoCarrito = new ImageIcon("carrito.png");
+
+        Integer[] cantidades = {1,2,3,4,5,6,7,8,9,10};
+        cantidad = new JComboBox<>(cantidades);
+        cantidad.setFont(new Font("Comic Sans MS",Font.BOLD,15));
+        cantidad.setBounds(310,420,100,50);
 
         botonIngresar = new JButton("Ingresar");
         botonIngresar.setFont(new Font("Comic Sans MS",Font.BOLD,15));
@@ -51,9 +57,9 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         botonHistorial.setBounds(1010,10,120,50);
         botonHistorial.addActionListener(this);
 
-        botonAgregar = new JButton("Registrarse");
+        botonAgregar = new JButton("Agregar al carro");
         botonAgregar.setFont(new Font("Comic Sans MS",Font.BOLD,15));
-        botonAgregar.setBounds(0,0,120,50);
+        botonAgregar.setBounds(130,420,170,50);
         botonAgregar.addActionListener(this);
 
 
@@ -64,10 +70,11 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         label2 = new JLabel("", iconoUE,JLabel.CENTER);
         label2.setBounds(200,30,300,300);
 
-        labelProducto = new JLabel("");
-        labelProducto.setFont(new Font("Comic Sans MS",Font.PLAIN,27));
-        labelProducto.setBounds(500,500,250,250);
-        labelProducto.setBackground(Color.BLACK);
+        labelProducto = new JLabel("hertsthrew");
+        labelProducto.setFont(new Font("Comic Sans MS",Font.PLAIN,30));
+        //labelProducto.setBackground(Color.BLUE);
+        //labelProducto.setOpaque(true);
+        labelProducto.setBounds(100,10,900,390);
 
         idUsuario = new JTextField("usuario");
         idUsuario.setFont(new Font("Comic Sans MS",Font.PLAIN,27));
@@ -97,7 +104,10 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         panel2.add(botonRegistrarse);
 
         panel3 = new JPanel();
+        panel3.setLayout(null);
         panel3.add(labelProducto);
+        panel3.add(botonAgregar);
+        panel3.add(cantidad);
         //panel3.setBackground(Color.BLACK);
 
         layeredPane = new JLayeredPane();
@@ -119,12 +129,13 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource()== botonRegistrarse){
-            NewAccount newAccount = new NewAccount();
+            CrearCuenta newAccount = new CrearCuenta();
         }
 
         if (e.getSource()== botonIngresar) {
 
             listaProductos = new JList<>();
+            listaProductos.addListSelectionListener(this);
             model = new DefaultListModel<>();
             listaProductos.setModel(model);
             listaProductos.setFont(new Font("Comic Sans MS",Font.PLAIN,20));
@@ -144,6 +155,10 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
             layeredPane.add(panel1, Integer.valueOf(2));
             panel2.setVisible(false);
 
+        }
+
+        if (e.getSource()==botonCarrito){
+            VentanaCarrito ventanaCarrito = new VentanaCarrito();
         }
 
     }
@@ -170,10 +185,11 @@ public class PantallaInicio extends JFrame implements ActionListener, FocusListe
         Producto seleccionado = listaProductos.getSelectedValue();
 
         if (seleccionado != null){
-            String infoProducto = "Nombre: " + seleccionado.getNombre() + "\nDescripción: " + seleccionado.getDescripcion()
-                    + "\nPrecio: $" + seleccionado.getPrecio() + "\nStock: " + seleccionado.getStock();
+            String infoProducto = "<html><b>Nombre:</b>" + seleccionado.getNombre() + "<br><b>Descripción:</b> " + seleccionado.getDescripcion()
+                    + "<br><b>Precio:</b> $" + seleccionado.getPrecio() + "<br><b>Stock:</b>  " + seleccionado.getStock()+ "</html>";
             labelProducto.setText(infoProducto);
         }
+
 
     }
 }

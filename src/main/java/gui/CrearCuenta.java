@@ -5,12 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class NewAccount extends JFrame implements ActionListener {
+public class CrearCuenta extends JFrame implements ActionListener {
 
     JTextField textField1, textField2;
     JButton button1;
 
-    NewAccount(){
+    CrearCuenta(){
 
         button1 = new JButton("Crear cuenta");
         button1.setBounds(50,50,200,40);
