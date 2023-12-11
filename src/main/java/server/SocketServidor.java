@@ -60,9 +60,17 @@ public class SocketServidor {
             peticionRNU(peticion);
         } else if (peticion[0].equals("AL1")){
             peticionAL1(out);
+        } else if (peticion[0].equals("PD")) {
+            peticionProductosDisponibles(out);
         }
         out.close();
         outputStream.close();
+    }
+
+    private  void peticionProductosDisponibles(PrintWriter out) {
+        GestorS g = new GestorS();
+        out.println(g.productos());
+
     }
 
     private void peticionAL1( PrintWriter out) {
@@ -101,5 +109,6 @@ public class SocketServidor {
         out.println(c.usuarioExiste());
 
     }
+
 
 }

@@ -1,5 +1,7 @@
 package server;
 
+import modelo.Producto;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -15,6 +17,16 @@ public class GestorS {
             System.out.println("Nombre Usuario:"+pedidos.get(i).getNombreU().substring(3));
             System.out.println("Precio:"+pedidos.get(i).getPrecio());
         }
+    }
+    public String productos(){
+        String retorno = "";
+        File archivo= new File("./Almuerzos");
+        String[] lista = archivo.list();
+        for (int i = 0; i <lista.length ; i++) {
+            File almuerzo=new File("./Almuerzos/"+lista[i]);
+            retorno+=leerLinea(almuerzo)+";";
+        }
+        return retorno;
     }
 
     public String stringMenu1(){
