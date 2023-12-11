@@ -12,7 +12,10 @@ public class Carrito {
     public Carrito() {
     }
 
-    public void agregarPedido(String correo);
+    public void agregarPedido(String correo,Venta venta){
+        SocketCliente s = new SocketCliente(8888);
+        s.enviar("V1/"+correo+"/"+venta);
+    }
     public ArrayList<Producto> consultarProductos(){
         ArrayList<Producto>productos = new ArrayList<>();
         SocketCliente s = new SocketCliente(8888);

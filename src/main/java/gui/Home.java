@@ -70,7 +70,9 @@ public class Home extends JFrame {
         botonNuevoPedido.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                GuiCarrito gC= new GuiCarrito(correo);
+                gC.setVisible(true);
+                dispose();
             }
         });
 
@@ -84,7 +86,7 @@ public class Home extends JFrame {
     }
 
     public static void main(String[] args) {
-    Home h = new Home();
+    Home h = new Home("q@ufromail.cl");
     h.setVisible(true);
     }
 

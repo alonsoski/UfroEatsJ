@@ -58,13 +58,18 @@ public class SocketServidor {
             peticionNU(peticion,out);
         } else if (peticion[0].equals("RNU")){
             peticionRNU(peticion);
-        } else if (peticion[0].equals("AL1")){
-            peticionAL1(out);
         } else if (peticion[0].equals("PD")) {
             peticionProductosDisponibles(out);
+        } else if (peticion[0].equals("V1")){
+            peticionVenta(peticion);
         }
         out.close();
         outputStream.close();
+    }
+
+    private void peticionVenta(String[] peticion) {
+        GestorS g = new GestorS();
+        g.crearPedido(peticion);
     }
 
     private  void peticionProductosDisponibles(PrintWriter out) {
@@ -73,11 +78,7 @@ public class SocketServidor {
 
     }
 
-    private void peticionAL1( PrintWriter out) {
-        System.out.println("peticion de actualizar menu");
-        GestorS gS = new GestorS();
-        out.println(gS.stringMenu1());
-    }
+
 
     private void peticionRNU(String[] peticion) {
         Cuenta c = new Cuenta(peticion[1],peticion[2]);

@@ -1,6 +1,8 @@
 package gui;
 import modelo.Carrito;
 import modelo.Producto;
+import modelo.Venta;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -8,9 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 public class GuiCarrito extends JFrame {
+    String correo;
     int cantidad;
     double precio;
     ArrayList<Producto> productos;
@@ -22,12 +27,15 @@ public class GuiCarrito extends JFrame {
     JButton agregarAlCarrito;
     JSpinner contador;
     JComboBox listaItems;
+
+    JButton volver;
     DefaultTableModel modeloTabla;
 
     JTable tabla;
 
 
         public GuiCarrito(String correo){
+            this.correo = correo;
             productos=llenadoProductos();
             this.setTitle("GuiCarrito");
             this.setSize(new Dimension(500,300));
@@ -37,14 +45,15 @@ public class GuiCarrito extends JFrame {
             panelPrincipal.setLayout(null);
             setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-
-
-
             producto = new JLabel("producto:");
             producto.setBounds(30,20,60,20);
 
             listaItems = new JComboBox();
             listaItems.setBounds(90,20,250,20);
+
+            volver = new JButton("Volver");
+            volver.setBounds(30,78,150,30);
+
             listaItems.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -58,12 +67,7 @@ public class GuiCarrito extends JFrame {
             contador = new JSpinner();
             contador.setBounds(87,50,60,25);
             contador.setModel(new SpinnerNumberModel(1,0,10,1));
-            contador.addChangeListener(new ChangeListener() {
-                @Override
-                public void stateChanged(ChangeEvent e) {
-                    cambiarPrecio();
-                }
-            });
+
 
             labelPrecio = new JLabel("precio:");
             labelPrecio.setBounds(350,20,60,20);
@@ -75,20 +79,34 @@ public class GuiCarrito extends JFrame {
 
 
 
-
             agregarAlCarrito = new JButton("Agregar al carrito");
             agregarAlCarrito.setBounds(300,78,150,30);
+            agregarAlCarrito.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int index= listaItems.getSelectedIndex();
+                    Carrito c = new Carrito();
+                    c.agregarPedido(correo, new Venta(productos.get(index).getNombre(),cantidad,precio*cantidad));
+                }
+            });
+            contador.addChangeListener(new ChangeListener() {
+                @Override
+                public void stateChanged(ChangeEvent e) {
+                    cambiarPrecio();
+                }
+            });
+            volver.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Home h = new Home(correo);
+                    h.setVisible(true);
+                    dispose();
+                }
+            });
 
             String[]nombres=nombres();
             DefaultComboBoxModel comboM= new DefaultComboBoxModel<>(nombres);
             listaItems.setModel(comboM);
-            agregarAlCarrito= new JButton();
-            agregarAlCarrito.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-                }
-            });
 
             panelPrincipal.add(agregarAlCarrito);
             panelPrincipal.add(producto);
@@ -97,10 +115,11 @@ public class GuiCarrito extends JFrame {
             panelPrincipal.add(contador);
             panelPrincipal.add(labelPrecio);
             panelPrincipal.add(cPrecio);
+            panelPrincipal.add(volver);
             this.add(panelPrincipal);
 
-
         }
+
     private String[] nombres() {
             String[] nombres= new String[this.productos.size()];
         for (int i = 0; i <this.productos.size() ; i++) {
@@ -121,7 +140,6 @@ public class GuiCarrito extends JFrame {
     }
 
     public static void main(String[] args) {
-        GuiCarrito c = new GuiCarrito();
-        c.setVisible(true);
+
     }
 }

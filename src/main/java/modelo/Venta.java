@@ -1,22 +1,15 @@
 package modelo;
 
 public class Venta {
-    int id;
     String descripcion;
     int cantidad;
     double precio;
-    double importe;
+
 
     public Venta() {
 
     }
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
     public String getDescripcion() {
         return descripcion;
     }
@@ -40,11 +33,14 @@ public class Venta {
         this.precio = precio;
     }
 
-    public double getImporte() {
-        return importe;
+    public Venta(String descripcion, int cantidad, double precio) {
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.precio = precio;
     }
 
-    public void setImporte(double importe) {
-        this.importe = importe;
+    @Override
+    public String toString() {
+        return this.descripcion+";"+this.cantidad+";"+this.precio;
     }
 }

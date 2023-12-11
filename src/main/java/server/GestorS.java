@@ -2,9 +2,7 @@ package server;
 
 import modelo.Producto;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,27 +27,9 @@ public class GestorS {
         return retorno;
     }
 
-    public String stringMenu1(){
-        String retorno ="";
-        File almuerzoDia = new File("./Almuerzos/AlmuerzosDelDia");
-        String[] lista = almuerzoDia.list();
-        for (int i = 0; i < lista.length ; i++) {
-            File almuerzo = new File("./Almuerzos/AlmuerzosDelDia/"+lista[i]);
-            retorno+=leerLinea(almuerzo);
-            retorno+="-";
-        }
-        return retorno;
-    }public String stringMenu2(){
-        String retorno ="";
-        File almuerzoDia = new File("./Almuerzos/Almuerzos");
-        String[] lista = almuerzoDia.list();
-        for (int i = 0; i < lista.length ; i++) {
-            File almuerzo = new File("./Almuerzos/Almuerzos/"+lista[i]);
-            retorno+=leerLinea(almuerzo);
-            retorno+="-";
-        }
-        return retorno;
-    }
+
+
+
 
     private String leerLinea(File almuerzo) {
         String retorno="";
@@ -95,8 +75,18 @@ public class GestorS {
         }catch (Exception e){
             System.out.println("no se pudo crear el archivo");
         }
-    }public void escribirArchivo(String path, String texto){
+    }public  void escribirArchivo(String path, String texto){
         File archivo = new File(path);
+        try {
+            FileWriter fw=new FileWriter(archivo);
+            BufferedWriter bw=new BufferedWriter(fw);
+            bw.write(texto);
+            bw.flush();
+        }catch (Exception e){
+            System.out.println("no se ha podido escribir en el archivo");
+        }
+
+
     }
 
     private static int obtenerPrecioP(String[] listaC, int i) {
@@ -112,5 +102,27 @@ public class GestorS {
         return lista[0];
     }
 
+    public  void crearPedido(String[] peticion){
+        int numero=0;
+        File carpeta= new File("./Cuentas/"+peticion[1]+"/Historial");
+        String[] lista = carpeta.list();
+        numero=lista.length+1;
+        File archivo= new File("./Cuentas/"+peticion[1]+"/Historial/"+"pedido"+numero+".txt");
+        try {
+            archivo.createNewFile();
+        }catch (Exception e){
+            System.out.println("no se ha podido crear el archivo");
+        }
+        String[]venta = peticion[2].split(";");
+        String texto= "Pedido:"+venta[0]+"\n" +
+                "Cantidad:"+venta[1]+"\n" +
+                "Precio:"+venta[2];
 
+
+        escribirArchivo("./Cuentas/"+peticion[1]+"/Historial/"+"pedido"+numero+".txt",texto);
+    }
+
+    public static void main(String[] args) {
+
+    }
 }
