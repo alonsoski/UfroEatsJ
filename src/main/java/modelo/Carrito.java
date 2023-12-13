@@ -3,7 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public class Carrito {
-    ArrayList<Producto>productosDisponibles;
+    private ArrayList<Producto>productosDisponibles;
 
     public Carrito(ArrayList<Producto> productosDisponibles) {
         this.productosDisponibles = productosDisponibles;

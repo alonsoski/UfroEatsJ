@@ -10,11 +10,18 @@ public class GestorS {
     public GestorS(){}
 
     public void verPedidos(){
-        ArrayList<Pedido>pedidos=listarPedidos();
-        for (int i = 0; i <pedidos.size() ; i++) {
-            System.out.println("Nombre Usuario:"+pedidos.get(i).getNombreU().substring(3));
-            System.out.println("Precio:"+pedidos.get(i).getPrecio());
+       File carpeta = new File("./Pedidos");
+       String[] lista = carpeta.list();
+        for (int i = 0; i <lista.length ; i++) {
+
+            String texto="-----------------------------------\n"
+                    +lista[i].substring(0,lista[i].length()-4)+"\n"
+                    +leerLinea(new File(carpeta+"/"+lista[i])).split(";")[0]+"\n"
+                    +leerLinea(new File(carpeta+"/"+lista[i])).split(";")[1]+"\n"
+                    +leerLinea(new File(carpeta+"/"+lista[i])).split(";")[2];
+            System.out.println(texto);
         }
+
     }
     public String productos(){
         String retorno = "";
@@ -46,28 +53,8 @@ public class GestorS {
         return retorno;
     }
 
-    private static ArrayList<Pedido> listarPedidos() {
-        ArrayList<Pedido> retorno = new ArrayList<Pedido>();
-        File carpeta = new File("./Pedidos");
-        String[] listaC = carpeta.list();
-        if (listaC.length==0){
-            System.out.println("no hay pedidos");
-        }else {
-            for (int i = 0; i < listaC.length ; i++) {
-                String nombre =obtenerNombreP(listaC[i]);
-                int precio =obtenerPrecioP(listaC,i);
-                ArrayList<Almuerzo> comidas = obtenerComidas(listaC,i);
-                Pedido p = new Pedido(nombre,comidas,precio,false);
-                retorno.add(p);
-            }
-        }
-        return  retorno;
-    }
 
-    private static ArrayList<Almuerzo> obtenerComidas(String[] listaC, int i) {
-        Almuerzo a = new Almuerzo();
-        return a.getAlmuerzos(listaC[i]);
-    }
+
     public void crearArchivo(String path, String nombre){
         File carpeta = new File(path+"/"+nombre);
         try {
@@ -120,6 +107,41 @@ public class GestorS {
 
 
         escribirArchivo("./Cuentas/"+peticion[1]+"/Historial/"+"pedido"+numero+".txt",texto);
+        crearPedidoGeneral(peticion);
+    }
+
+    private void crearPedidoGeneral(String[] peticion) {
+        String nombre =crearNombre(peticion);
+        File archivo = new File(nombre);
+        try {
+            archivo.createNewFile();
+        }catch (Exception e){
+            System.out.println("no se ha podido crear el archivo general");
+            System.out.println(nombre);
+            e.printStackTrace();
+        }
+        String[]venta = peticion[2].split(";");
+        String texto= "Pedido:"+venta[0]+";" +
+                "Cantidad:"+venta[1]+";" +
+                "Precio:"+venta[2];
+
+
+        escribirArchivo(nombre,texto);
+    }
+
+    private String crearNombre(String[] peticion) {
+        int numero=0;
+        String nombre = peticion[1];//.substring(0,peticion[1].length()-3);
+        File archivo = new File("./Pedidos/"+nombre+numero+".txt");
+
+        do {
+            if (archivo.exists()){
+                numero++;
+            }
+            archivo=new File("./Pedidos/"+nombre+(numero)+".txt");
+        }while (archivo.exists());
+        System.out.println("./Pedidos/"+nombre+numero+".txt");
+        return "./Pedidos/"+nombre+numero+".txt";
     }
 
     public static void main(String[] args) {

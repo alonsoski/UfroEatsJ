@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Inicio extends JFrame {
-    PanelConImagen panelPrincipal;
-    JButton botonIngresar;
-    JButton botonRegistrar;
+    private PanelConImagen panelPrincipal;
+    private JButton botonIngresar;
+    private JButton botonRegistrar;
 
     public Inicio() {
 

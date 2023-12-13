@@ -15,20 +15,19 @@ import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 public class GuiCarrito extends JFrame {
-    String correo;
-    int cantidad;
-    double precio;
-    ArrayList<Producto> productos;
-    PanelConImagen panelPrincipal;
-    JLabel producto;
-    JLabel labelPrecio;
-    JLabel cPrecio;
-    JLabel lblCantidad;
-    JButton agregarAlCarrito;
-    JSpinner contador;
-    JComboBox listaItems;
-
-    JButton volver;
+    private String correo;
+    private int cantidad;
+    private double precio;
+    private ArrayList<Producto> productos;
+    private PanelConImagen panelPrincipal;
+    private JLabel producto;
+    private JLabel labelPrecio;
+    private JLabel cPrecio;
+    private JLabel lblCantidad;
+    private JButton agregarAlCarrito;
+    private JSpinner contador;
+    private JComboBox listaItems;
+    private JButton volver;
     DefaultTableModel modeloTabla;
 
     JTable tabla;

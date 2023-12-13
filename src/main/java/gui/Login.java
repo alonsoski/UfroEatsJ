@@ -7,12 +7,12 @@ import java.awt.event.ActionListener;
 
 import modelo.SocketCliente;
 public class Login extends JFrame {
-    PanelConImagen panelPrincipal;
-    JTextField correo;
-    JTextField contra;
-    JButton botonIngresar;
-    JButton botonRegistrar;
-    JButton botonVolver;
+    private PanelConImagen panelPrincipal;
+    private JTextField correo;
+    private JTextField contra;
+    private JButton botonIngresar;
+    private JButton botonRegistrar;
+    private JButton botonVolver;
 
     public Login() {
         this.setVisible(true);

@@ -3,7 +3,7 @@ package gui;
 import javax.swing.*;
 
 public class Historial extends JFrame {
-    String correo;
+    private String correo;
     private DefaultListModel<String> listaPedidosModel;
     private JList<String> lista;
     public Historial(String correo){

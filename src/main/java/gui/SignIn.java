@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 import modelo.SocketCliente;
 
 public class SignIn extends JFrame {
-    PanelConImagen panelPrincipal;
-    JTextField correo;
-    JTextField contra;
-    JTextField contra2;
-    JButton botonRegistrar;
-    JButton botonIngresar;
-    JButton botonVolver;
+    private PanelConImagen panelPrincipal;
+    private JTextField correo;
+    private JTextField contra;
+    private JTextField contra2;
+    private JButton botonRegistrar;
+    private JButton botonIngresar;
+    private JButton botonVolver;
 
     public SignIn() {
         this.setVisible(true);

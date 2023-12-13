@@ -1,9 +1,9 @@
 package modelo;
 
 public class Producto {
-    String nombre;
-    double precio;
-    String descripcion;
+    private String nombre;
+    private double precio;
+    private String descripcion;
 
     public Producto(String nombre, double precio, String descripcion) {
         this.nombre = nombre;

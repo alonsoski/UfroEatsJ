@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 public class RegistroNombreUsuario extends JFrame {
-    String correoU;
+    private String correoU;
     private  void nombreDeUsuario() {
         SocketCliente s = new SocketCliente(8888);
         String peticion = s.enviarYRecibir("NU/"+correoU+"/"+"asd");

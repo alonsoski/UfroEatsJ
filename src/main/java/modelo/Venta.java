@@ -1,9 +1,9 @@
 package modelo;
 
 public class Venta {
-    String descripcion;
-    int cantidad;
-    double precio;
+    private String descripcion;
+    private int cantidad;
+    private double precio;
 
 
     public Venta() {

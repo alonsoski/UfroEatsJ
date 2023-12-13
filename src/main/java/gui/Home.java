@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Home extends JFrame {
-    String nombreUsuario;
-    PanelConImagen panelPrincipal;
-    JButton botonNuevoPedido;
-    JButton botonHistorial;
-    JButton terminarSesion;
+    private String nombreUsuario;
+    private PanelConImagen panelPrincipal;
+    private JButton botonNuevoPedido;
+    private JButton botonHistorial;
+    private JButton terminarSesion;
     public Home(){
         setupPrincipal("q@ufromail.cl");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
